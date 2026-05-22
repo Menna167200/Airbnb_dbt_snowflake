@@ -1,0 +1,9 @@
+
+# dbt / project artifacts
+logs/
+target/
+dbt_packages/
+
+# user-specific config
+.user.yml
+profiles.yml
