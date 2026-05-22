@@ -5,6 +5,7 @@ An end-to-end Analytics Engineering project built using AWS S3, Snowflake, and d
 This project demonstrates a modern ELT workflow starting from cloud object storage ingestion all the way to analytics-ready dimensional models using a layered dbt architecture.
 
 <img width="1307" height="500" alt="image" src="https://github.com/user-attachments/assets/7f098c82-1613-4c6d-804f-fd39d5ea1ce8" />
+
 ---
 
 # 🚀 Project Overview
