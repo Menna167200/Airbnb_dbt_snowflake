@@ -1,11 +1,10 @@
-# 🏡 Airbnb Analytics Engineering Project
+# 🏡 Airbnb Data Engineering Project
 
-An end-to-end Data Engineering project built using AWS S3, Snowflake, and dbt.
+An end-to-end Analytics Engineering project built using AWS S3, Snowflake, and dbt.
 
 This project demonstrates a modern ELT workflow starting from cloud object storage ingestion all the way to analytics-ready dimensional models using a layered dbt architecture.
 
-
-<img width="1298" height="488" alt="image" src="https://github.com/user-attachments/assets/ec516fc4-5b1c-420d-b197-c60de07ae4be" />
+<img width="1307" height="500" alt="image" src="https://github.com/user-attachments/assets/7f098c82-1613-4c6d-804f-fd39d5ea1ce8" />
 
 ---
 
@@ -44,9 +43,9 @@ The ingestion workflow included:
 - Creating Snowflake file formats
 - Creating external stages connected to AWS S3
 - Loading CSV files into Snowflake tables inside the `NODE` schema
-
+  
 ```
-# check here https://docs.snowflake.com/en/sql-reference/sql/create-file-format
+//check here https://docs.snowflake.com/en/sql-reference/sql/create-file-format
 CREATE OR REPLACE FILE FORMAT csv_format
   TYPE = 'CSV' 
   FIELD_DELIMITER = ','
@@ -56,12 +55,12 @@ CREATE OR REPLACE FILE FORMAT csv_format
 
 CREATE OR REPLACE STAGE s3stage
 FILE_FORMAT = csv_format
-URL=''; //pointer to the folder holding all the data
-    
+URL='s3://bucket_name/folder_name/'; //pointer to the folder holding all the data
+
 COPY INTO TABLE_NAME
 FROM @s3stage
-FILES=('file_name.csv')
-CREDENTIALS=(aws_key_id = '', aws_secret_key = ''); 
+FILES=('table_name.csv')
+CREDENTIALS=(aws_key_id = '', aws_secret_key = '');
 ```
 
 Source tables:
@@ -73,7 +72,9 @@ Source tables:
 
 # 🏗️ Project Architecture
 
-<img width="1536" height="1024" alt="ChatGPT Image May 23, 2026, 01_37_05 AM" src="https://github.com/user-attachments/assets/c793d53c-76e9-4f87-b2ef-ce46d01ff97a" />
+<img width="1536" height="1024" alt="ChatGPT Image May 23, 2026, 01_37_05 AM" src="https://github.com/user-attachments/assets/8fbe17b7-636c-4f24-ad4d-4182f22c943e" />
+
+---
 
 # ⚡ RAW Layer
 

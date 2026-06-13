@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: fact_bookings
+    description: 'The fact_bookings stores transactional booking records for the Airbnb platform, including booking details, financial metrics, listing attributes, and host response performance.'
+    columns:
+        - name: BOOKING_ID
+          tests:
+            - not_null
+            - unique
+
+        - name: LISTING_KEY
+          tests:
+            - not_null
+            - relationships:
+                to: ref('dim_listings')
+                field: DBT_SCD_ID
+
+        - name: HOST_KEY
+          tests:
+            - not_null
+            - relationships:
+                to: ref('dim_hosts')
+                field: DBT_SCD_ID
+
+        - name: BOOKING_DATE
+          tests:
+            - not_null
+    
+        - name: NIGHTS_BOOKED
+          tests:
+            - not_null
+    
+        - name: BOOKING_AMOUNT
+          tests:
+            - not_null
+    
+        - name: TOTAL_AMOUNT
+          tests:
+            - not_null
+    
+        - name: BOOKING_STATUS
+          tests:
+            - booking_test
+
+
