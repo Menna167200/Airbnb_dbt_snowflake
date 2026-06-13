@@ -5,6 +5,17 @@ build/
 dist/
 wheels/
 *.egg-info
+uv.lock
 
 # Virtual environments
 .venv
+.env
+.vscode
+
+# Airflow & dbt
+target/
+plugins/
+logs/
+Airflow_logs/
+config/
+
