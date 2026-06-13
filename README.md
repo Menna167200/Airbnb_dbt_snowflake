@@ -1,0 +1,178 @@
+# 🏡 Airbnb Analytics Engineering Project
+
+An end-to-end Data Engineering project built using AWS S3, Snowflake, and dbt.
+
+This project demonstrates a modern ELT workflow starting from cloud object storage ingestion all the way to analytics-ready dimensional models using a layered dbt architecture.
+
+
+<img width="1298" height="488" alt="image" src="https://github.com/user-attachments/assets/ec516fc4-5b1c-420d-b197-c60de07ae4be" />
+
+---
+
+# 🚀 Project Overview
+
+The pipeline follows a layered architecture:
+
+AWS S3 → Snowflake → RAW → STAGING → MART
+
+The project includes:
+- Cloud data ingestion using AWS S3
+- Snowflake external stages
+- Incremental dbt models
+- Data cleaning and transformation
+- Star schema dimensional modeling
+- Slowly Changing Dimensions (SCD Type 2)
+- Custom generic testing
+- dbt documentation generation
+
+---
+
+# 🛠️ Tech Stack
+
+- dbt
+- Snowflake
+- AWS S3
+- SQL
+
+---
+
+# ☁️ Data Ingestion with AWS S3 & Snowflake
+
+The raw Airbnb datasets were uploaded to an AWS S3 bucket and then loaded into Snowflake using stages and the `COPY INTO` command.
+
+The ingestion workflow included:
+- Creating Snowflake file formats
+- Creating external stages connected to AWS S3
+- Loading CSV files into Snowflake tables inside the `NODE` schema
+
+```
+# check here https://docs.snowflake.com/en/sql-reference/sql/create-file-format
+CREATE OR REPLACE FILE FORMAT csv_format
+  TYPE = 'CSV' 
+  FIELD_DELIMITER = ','
+  SKIP_HEADER = 1
+  ERROR_ON_COLUMN_COUNT_MISMATCH = FALSE;
+
+
+CREATE OR REPLACE STAGE s3stage
+FILE_FORMAT = csv_format
+URL=''; //pointer to the folder holding all the data
+    
+COPY INTO TABLE_NAME
+FROM @s3stage
+FILES=('file_name.csv')
+CREDENTIALS=(aws_key_id = '', aws_secret_key = ''); 
+```
+
+Source tables:
+- BOOKINGS
+- HOSTS
+- LISTINGS
+
+---
+
+# 🏗️ Project Architecture
+
+<img width="1536" height="1024" alt="ChatGPT Image May 23, 2026, 01_37_05 AM" src="https://github.com/user-attachments/assets/c793d53c-76e9-4f87-b2ef-ce46d01ff97a" />
+
+# ⚡ RAW Layer
+
+The RAW layer incrementally ingests data from Snowflake source tables.
+
+Key features:
+- Incremental loading using `CREATED_AT`
+- Reduced compute costs
+- Faster execution
+- Scalable processing for large datasets
+
+---
+
+# 🧹 STAGING Layer
+
+The staging layer performs:
+- Data cleaning
+- Null handling
+- Derived metrics creation
+- Data standardization
+- Data validation
+
+---
+
+# 📊 MART Layer
+
+The MART layer follows a Star Schema design.
+
+## ⭐ Fact Table
+
+### `fact_bookings`
+
+Contains:
+- Booking metrics
+- Financial measures
+- Booking statuses
+- Listing key
+- Host key
+
+---
+
+## 📚 Dimension Tables
+
+### `dim_hosts`
+Stores historical host information.
+
+### `dim_listings`
+Stores historical listing information.
+
+---
+
+# 🕒 Slowly Changing Dimensions (SCD Type 2)
+
+dbt snapshots are used to preserve historical changes in:
+- Hosts
+- Listings
+
+This enables:
+- Historical tracking
+- Point-in-time analysis
+- Change auditing
+
+---
+
+# ✅ Data Quality Testing
+
+The project includes:
+- `not_null` tests
+- `unique` tests
+- `relationships` tests
+- Custom generic tests
+
+### Custom Validations
+- Booking status validation
+- Property type validation
+- Room type validation
+
+---
+
+# 📈 Key Engineering Concepts Demonstrated
+
+- Analytics Engineering
+- ELT Pipelines
+- Incremental Loading
+- Data Modeling
+- Star Schema Design
+- Slowly Changing Dimensions
+- Data Quality Testing
+- dbt Snapshots
+- Cloud Data Warehousing
+
+---
+
+# 📌 Future Improvements
+
+- Add Apache Airflow orchestration
+- Add CI/CD pipelines
+- Add source freshness monitoring
+- Add dashboarding layer
+- Add automated deployments
+
+---
