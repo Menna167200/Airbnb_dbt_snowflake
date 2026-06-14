@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: NODE
+    database: AIRBNB  
+    schema: NODE  
+    tables:
+      - name: BOOKINGS
+      - name: HOSTS
+      - name: LISTINGS
+
