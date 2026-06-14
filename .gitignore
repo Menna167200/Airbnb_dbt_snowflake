@@ -9,8 +9,8 @@ uv.lock
 
 # Virtual environments
 .venv
-.env
 .vscode
+.env
 
 # Airflow & dbt
 target/
