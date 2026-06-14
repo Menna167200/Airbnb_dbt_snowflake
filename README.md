@@ -12,7 +12,7 @@ This project demonstrates a modern ELT workflow starting from cloud object stora
 
 The pipeline follows a layered architecture:
 
-AWS S3 → Snowflake → RAW → STAGING → MART
+AWS S3 → Snowflake → RAW → STAGING → MART → Orchestrated by Airflow
 
 The project includes:
 - Cloud data ingestion using AWS S3
@@ -23,6 +23,8 @@ The project includes:
 - Slowly Changing Dimensions (SCD Type 2)
 - Custom generic testing
 - dbt documentation generation
+- Workflow orchestration with Apache Airflow (via Cosmos)
+- Fully containerized local environment with Docker
 
 ---
 
@@ -31,6 +33,9 @@ The project includes:
 - dbt
 - Snowflake
 - AWS S3
+- Apache Airflow
+- Astronomer Cosmos
+- Docker
 - SQL
 
 ---
@@ -154,6 +159,14 @@ The project includes:
 
 ---
 
+# 🔄 Orchestration with Apache Airflow
+
+The dbt workflow (staging → snapshots → marts → tests) is orchestrated using Apache Airflow with Astronomer Cosmos, which automatically generates Airflow tasks from the dbt project's lineage graph.
+
+The full stack runs locally via Docker Compose (Airflow, Postgres, Redis, custom image with dbt-core + dbt-snowflake).
+
+---
+
 # 📈 Key Engineering Concepts Demonstrated
 
 - Analytics Engineering
@@ -165,12 +178,12 @@ The project includes:
 - Data Quality Testing
 - dbt Snapshots
 - Cloud Data Warehousing
-
+- Workflow Orchestration (Airflow + Cosmos)
+- Containerized Local Development (Docker)
 ---
 
 # 📌 Future Improvements
 
-- Add Apache Airflow orchestration
 - Add CI/CD pipelines
 - Add source freshness monitoring
 - Add dashboarding layer
