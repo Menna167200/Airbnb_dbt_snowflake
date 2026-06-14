@@ -1,0 +1,11 @@
+[project]
+name = "airbnb"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "apache-airflow>=3.1.8",
+    "dbt-core>=1.11.11",
+    "dbt-snowflake>=1.11.5",
+]
