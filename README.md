@@ -77,7 +77,7 @@ Source tables:
 
 # 🏗️ Project Architecture
 
-<img width="1536" height="1024" alt="ChatGPT Image May 23, 2026, 01_37_05 AM" src="https://github.com/user-attachments/assets/8fbe17b7-636c-4f24-ad4d-4182f22c943e" />
+<img width="1536" height="1024" alt="ChatGPT Image Jun 14, 2026, 04_20_58 AM" src="https://github.com/user-attachments/assets/ce425665-9d6a-47fa-bde9-6f25082fefa2" />
 
 ---
 
@@ -220,3 +220,8 @@ To let Airflow (and Cosmos) authenticate with Snowflake, you need to create an *
 
 # 📚 References
 - [Astronomer Cosmos](https://github.com/astronomer/astronomer-cosmos) — for example DAGs and configuration patterns
+
+---
+
+# 🙏 Acknowledgements
+This project was built while following [Ansh Lamba's tutorial](https://youtu.be/3SZSDKEZqoA?si=bblomHfSB2m5rrZq), which was a huge help in understanding the dbt + Snowflake workflow. Highly recommended
