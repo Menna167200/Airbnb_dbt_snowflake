@@ -4,7 +4,7 @@ An end-to-end Analytics Engineering project built using AWS S3, Snowflake, and d
 
 This project demonstrates a modern ELT workflow starting from cloud object storage ingestion all the way to analytics-ready dimensional models using a layered dbt architecture.
 
-<img width="1307" height="500" alt="image" src="https://github.com/user-attachments/assets/7f098c82-1613-4c6d-804f-fd39d5ea1ce8" />
+<img width="930" height="387" alt="image (1)" src="https://github.com/user-attachments/assets/08e598a0-5469-4f06-b0e4-8b764f4a12c2" />
 
 ---
 
@@ -167,6 +167,33 @@ The full stack runs locally via Docker Compose (Airflow, Postgres, Redis, custom
 
 ---
 
+# 🔗 Connecting Airflow to Snowflake
+
+To let Airflow (and Cosmos) authenticate with Snowflake, you need to create an **Airflow Connection**:
+
+1. Open the Airflow UI at `http://localhost:8080`
+2. Go to **Admin → Connections**
+3. Click **+ Add Connection**
+4. Set:
+   - **Connection ID**: `snowflake_connection` (must match the `conn_id` used in the dbt DAG)
+   - **Connection Type**: `Snowflake`
+5. Fill in your Snowflake credentials:
+   - **Account**
+   - **Login** (username)
+   - **Password**
+   - **Role**
+   - **Warehouse**
+   - **Database**
+   - **Schema**
+6. Click **Save**
+
+<img width="206" height="255" alt="image (2)" src="https://github.com/user-attachments/assets/61407745-2ee7-4e42-a666-4b702ef7ff46" />
+<img width="885" height="262" alt="image (3)" src="https://github.com/user-attachments/assets/30239e59-5e18-44d2-bdd1-a1828cb28d2b" />
+
+> 💡 Database, schema, and warehouse can also be supplied via environment variables (`SNOWFLAKE_DATABASE`, `SNOWFLAKE_SCHEMA`, `SNOWFLAKE_WAREHOUSE`) and are picked up automatically by Cosmos's `SnowflakeUserPasswordProfileMapping`.
+
+---
+
 # 📈 Key Engineering Concepts Demonstrated
 
 - Analytics Engineering
@@ -190,3 +217,6 @@ The full stack runs locally via Docker Compose (Airflow, Postgres, Redis, custom
 - Add automated deployments
 
 ---
+
+# 📚 References
+- [Astronomer Cosmos](https://github.com/astronomer/astronomer-cosmos) — for example DAGs and configuration patterns
